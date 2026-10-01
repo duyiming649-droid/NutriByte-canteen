@@ -56,7 +56,7 @@ export function texMat(key, build) {
 }
 
 export const signMaterials = {
-  logo: () => texMat('logo', () => std({ map: T.logoTexture(), roughness: 0.5 })),
+  logo: () => texMat('logo', () => std({ map: T.logoTexture(), roughness: 0.5, transparent: true })),
   menuA: () => texMat('menuA', () => std({ map: T.menuBoardTexture('今日菜单 TODAY', [
     ['A · 招牌韩式牛肉能量碗', 'Signature Bulgogi Bowl', 'HK$48'],
     ['B · 香烤鸡胸高蛋白盒', 'Grilled Chicken Breast Box', 'HK$42'],
@@ -73,7 +73,7 @@ export const signMaterials = {
   quote: () => texMat('quote', () => new THREE.MeshBasicMaterial({ map: T.quoteTexture(), transparent: true })),
   neon: () => texMat('neon', () => new THREE.MeshBasicMaterial({ map: T.neonTexture('EAT FRESH · 吃得新鲜'), transparent: true, toneMapped: false })),
   frost: () => texMat('frost', () => new THREE.MeshBasicMaterial({ map: T.frostBandTexture(), transparent: true, opacity: 0.92 })),
-  pickup: () => texMat('pickup', () => std({ map: T.pickupSignTexture(), roughness: 0.55 })),
+  pickup: () => texMat('pickup', () => std({ map: T.pickupSignTexture(), roughness: 0.55, transparent: true })),
   decal: () => texMat('decal', () => new THREE.MeshBasicMaterial({ map: T.floorDecalTexture(), transparent: true, opacity: 0.9 })),
   scoopGuide: () => texMat('scoopGuide', () => std({ map: T.scoopGuideTexture(), roughness: 0.7 })),
   hours: () => texMat('hours', () => std({ map: T.hoursTexture(), roughness: 0.6, transparent: true })),

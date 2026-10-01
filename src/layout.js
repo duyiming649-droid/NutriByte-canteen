@@ -204,18 +204,24 @@ export function buildShop(scene, reg) {
 
   // back line: sink / prep / range / ovens / fridge, z 6.5-7.2
   const backline = P.grp(0, 0, 0);
-  backline.add(P.box(5.6, 0.88, 0.7, M.counterWhite, 3.15, 0.44, 6.85));
+  // cabinet body split so the sink cabinet is hollow (real basin depth)
+  backline.add(P.box(4.45, 0.88, 0.7, M.counterWhite, 3.725, 0.44, 6.85));
+  backline.add(P.box(1.15, 0.88, 0.1, M.counterWhite, 0.925, 0.44, 6.55));
+  backline.add(P.box(1.15, 0.88, 0.1, M.counterWhite, 0.925, 0.44, 7.15));
+  backline.add(P.box(0.05, 0.88, 0.5, M.counterWhite, 0.375, 0.44, 6.85));
   backline.add(P.box(5.5, 0.08, 0.6, M.charcoal, 3.15, 0.04, 6.85));
-  backline.add(P.box(5.6, 0.04, 0.7, M.stainless, 3.15, 0.9, 6.85));
-  // double sink x 0.35-1.45 (raised rim + recessed dark twin basins)
-  for (const sx of [0.72, 1.14]) {
-    backline.add(P.box(0.42, 0.025, 0.46, M.stainlessBrushed, sx, 0.9225, 6.85));
-    backline.add(P.box(0.32, 0.03, 0.36, new THREE.MeshStandardMaterial({ color: 0x11181c, roughness: 0.5, metalness: 0.6 }), sx, 0.912, 6.85));
-  }
-  backline.add(P.box(0.035, 0.03, 0.44, M.stainlessBrushed, 0.93, 0.925, 6.85));
+  // counter top split around a sink cut-out (x 0.35-1.50) so the basins are real holes
+  backline.add(P.box(4.45, 0.04, 0.7, M.stainless, 3.725, 0.9, 6.85));
+  backline.add(P.box(1.15, 0.04, 0.1, M.stainless, 0.925, 0.9, 6.55));
+  backline.add(P.box(1.15, 0.04, 0.1, M.stainless, 0.925, 0.9, 7.15));
+  // double sink: two recessed basins (depth 14cm) separated by a divider web
+  const sinkA = P.sinkBasin(0.5, 0.46, 0.14); sinkA.position.set(0.625, 0.92, 6.85); backline.add(sinkA);
+  const sinkB = P.sinkBasin(0.5, 0.46, 0.14); sinkB.position.set(1.225, 0.92, 6.85); backline.add(sinkB);
+  backline.add(P.box(0.05, 0.02, 0.5, M.stainless, 0.925, 0.93, 6.85));
+  backline.add(P.box(0.03, 0.14, 0.46, M.stainlessBrushed, 0.925, 0.85, 6.85));
   backline.add(P.cyl(0.012, 0.012, 0.25, 8, M.stainless, 0.93, 1.02, 7.06));
   backline.add(P.box(0.024, 0.024, 0.22, M.stainless, 0.93, 1.14, 6.97));
-  backline.add(P.cyl(0.03, 0.035, 0.14, 10, M.brandGreen, 1.38, 0.99, 7.08));
+  backline.add(P.cyl(0.03, 0.035, 0.14, 10, M.brandGreen, 1.38, 0.99, 7.15));
   // prep table x 1.45-2.95
   const bd1 = P.cuttingBoard(0x2fa36b); bd1.position.set(1.75, 0.92, 6.78); backline.add(bd1);
   const bd2 = P.cuttingBoard(0xf2f2ee); bd2.position.set(2.2, 0.92, 6.85); backline.add(bd2);
@@ -231,8 +237,10 @@ export function buildShop(scene, reg) {
   // induction range x 2.95-4.15 (batch cooking pots)
   backline.add(P.box(1.2, 0.02, 0.66, M.charcoal, 3.55, 0.915, 6.85));
   for (const [bx, bz] of [[3.25, 6.62], [3.85, 6.62], [3.25, 7.08], [3.85, 7.08]]) {
-    backline.add(P.cyl(0.09, 0.09, 0.006, 16, new THREE.MeshStandardMaterial({ color: 0x14181a, roughness: 0.4 }), bx, 0.928, bz));
+    backline.add(P.cyl(0.1, 0.1, 0.006, 16, new THREE.MeshStandardMaterial({ color: 0x14181a, roughness: 0.4 }), bx, 0.928, bz));
   }
+  const ring1 = P.burnerRing(0.17); ring1.position.set(3.25, 0.931, 6.62); backline.add(ring1);
+  const ring2 = P.burnerRing(0.15); ring2.position.set(3.85, 0.931, 7.08); backline.add(ring2);
   const pot1 = P.stockpot(1.1); pot1.position.set(3.25, 0.925, 6.62); backline.add(pot1);
   const pot2 = P.stockpot(0.9); pot2.position.set(3.85, 0.925, 7.08); pot2.rotation.y = Math.PI; backline.add(pot2);
   // combi oven tower x 4.15-5.05

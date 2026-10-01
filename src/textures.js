@@ -147,11 +147,11 @@ export function menuBoardTexture(title, items, footer) {
       ctx.textAlign = 'right';
       ctx.fillStyle = '#ffffff';
       ctx.font = `bold 34px ${FONT}`;
-      ctx.fillText(price, 976, y);
+      ctx.fillText(price, 950, y);
       y += 40;
       ctx.strokeStyle = 'rgba(255,255,255,0.26)';
       ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(48, y); ctx.lineTo(976, y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(48, y); ctx.lineTo(950, y); ctx.stroke();
       y += 42;
     }
     ctx.fillStyle = '#bfe8d2';

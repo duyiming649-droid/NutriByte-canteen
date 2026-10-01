@@ -220,6 +220,41 @@ export function grainJar(content = 0xd9c9a0) {
 
 /* ---------------- kitchen equipment ---------------- */
 
+// recessed sink basin; origin sits on the counter surface, interior descends -y
+export function sinkBasin(w = 0.5, d = 0.46, depth = 0.14) {
+  const g = grp();
+  const t = 0.013;
+  const rim = 0.025;
+  const dark = new THREE.MeshStandardMaterial({ color: 0x22282b, roughness: 0.6, metalness: 0.25 });
+  // chrome rim, slightly proud of the counter top
+  g.add(box(w + rim * 2, 0.018, rim, M.stainless, 0, 0.009, -(d + rim) / 2));
+  g.add(box(w + rim * 2, 0.018, rim, M.stainless, 0, 0.009, (d + rim) / 2));
+  g.add(box(rim, 0.018, d, M.stainless, -(w + rim) / 2, 0.009, 0));
+  g.add(box(rim, 0.018, d, M.stainless, (w + rim) / 2, 0.009, 0));
+  // interior walls descending into the cabinet
+  const wallH = depth + 0.01;
+  const wallY = -depth / 2 + 0.005;
+  g.add(box(t, wallH, d, M.stainlessBrushed, -w / 2 + t / 2, wallY, 0));
+  g.add(box(t, wallH, d, M.stainlessBrushed, w / 2 - t / 2, wallY, 0));
+  g.add(box(w, wallH, t, M.stainlessBrushed, 0, wallY, -d / 2 + t / 2));
+  g.add(box(w, wallH, t, M.stainlessBrushed, 0, wallY, d / 2 - t / 2));
+  // dark bottom + drain
+  g.add(box(w - t * 2, 0.012, d - t * 2, dark, 0, -depth + 0.006, 0));
+  g.add(cyl(0.026, 0.026, 0.01, 12, dark, 0, -depth + 0.014, 0));
+  return g;
+}
+
+// dark cast-iron style burner ring that reads around a pot base
+export function burnerRing(r = 0.17) {
+  const g = grp();
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.011, 8, 28), M.steelDark);
+  ring.rotation.x = Math.PI / 2;
+  ring.position.y = 0.004;
+  ring.castShadow = true;
+  g.add(ring);
+  return g;
+}
+
 export function scaleProp() {
   const g = grp();
   g.add(box(0.3, 0.035, 0.26, M.counterWhite, 0, 0.0175, 0));
@@ -272,10 +307,13 @@ export function storageRack(w = 0.5, d = 1.9, tiers = 4, h = 1.85) {
 
 export function hood(len = 2.2, dep = 0.7) {
   const g = grp();
-  g.add(box(len, 0.42, dep, M.stainless, 0, 0.21, 0));
-  g.add(box(len - 0.12, 0.05, dep - 0.12, M.stainlessBrushed, 0, -0.02, 0));
+  // lower-reflectance brushed steel: keeps panel detail instead of mirroring the env
+  const steel = new THREE.MeshStandardMaterial({ color: 0xaeb4b8, roughness: 0.55, metalness: 0.55 });
+  const steelDark = new THREE.MeshStandardMaterial({ color: 0x8f9599, roughness: 0.6, metalness: 0.5 });
+  g.add(box(len, 0.42, dep, steel, 0, 0.21, 0));
+  g.add(box(len - 0.12, 0.05, dep - 0.12, steelDark, 0, -0.02, 0));
   g.add(box(len - 0.4, 0.012, 0.1, M.lightWarm, 0, -0.048, -dep / 2 + 0.2));
-  g.add(box(0.3, 0.65, 0.3, M.stainless, 0, 0.735, 0));
+  g.add(box(0.3, 0.65, 0.3, steel, 0, 0.735, 0));
   return g;
 }
 

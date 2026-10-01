@@ -9,10 +9,10 @@ export const VIEW_LABELS = {
 };
 
 export const VIEWS = {
-  overview: { pos: [12.0, 8.0, -10.0], tgt: [4.2, 0.2, 3.8] },
+  overview: { pos: [11.0, 7.2, -9.0], tgt: [4.2, 0.2, 3.8] },
   entrance: { pos: [2.4, 2.0, -4.3], tgt: [6.6, 0.95, 0.3] },
   dining: { pos: [7.1, 1.85, 0.45], tgt: [1.2, 0.9, 2.1] },
-  kitchen: { pos: [4.35, 1.9, 0.5], tgt: [2.7, 0.95, 4.9] },
+  kitchen: { pos: [4.15, 2.1, 0.35], tgt: [2.6, 0.85, 5.2] },
   backline: { pos: [5.9, 2.15, 4.35], tgt: [1.5, 0.9, 6.85] },
   pickup: { pos: [4.6, 1.75, 1.2], tgt: [7.5, 1.05, 3.9] },
 };

@@ -42,11 +42,11 @@ controls.update();
 /* ---------- environment & lights ---------- */
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity = 0.42;
+scene.environmentIntensity = 0.48;
 
-scene.add(new THREE.HemisphereLight(0xeaf4ec, 0xd8cfc2, 0.45));
+scene.add(new THREE.HemisphereLight(0xeaf4ec, 0xd8cfc2, 0.6));
 
-const sun = new THREE.DirectionalLight(0xfff2e0, 2.4);
+const sun = new THREE.DirectionalLight(0xfff2e0, 2.1);
 sun.position.set(2.5, 9, -6.5);
 sun.target.position.set(4.2, 0, 3.6);
 sun.castShadow = true;
@@ -70,11 +70,11 @@ for (const [px, pz] of [[1.05, 0.37], [2.45, 0.37], [1.5, 2.2], [2.75, 1.5], [4.
 const islandL = new THREE.PointLight(0xeef7ff, 8, 2.8, 2);
 islandL.position.set(2.75, 2.2, 5.35);
 scene.add(islandL);
-const hoodL = new THREE.PointLight(0xffc890, 6, 2.6, 2);
-hoodL.position.set(4.2, 1.8, 6.6);
+const hoodL = new THREE.PointLight(0xffc890, 5, 2.4, 2);
+hoodL.position.set(4.2, 1.55, 6.7);
 scene.add(hoodL);
-const fridgeL = new THREE.PointLight(0x66d19a, 3, 1.5, 2);
-fridgeL.position.set(5.5, 1.15, 6.45);
+const fridgeL = new THREE.PointLight(0xa9f0c8, 2, 0.9, 2);
+fridgeL.position.set(5.5, 1.15, 6.6);
 scene.add(fridgeL);
 const hotL = new THREE.PointLight(0xffb36b, 2, 1.1, 2);
 hotL.position.set(7.92, 1.3, 3.75);
