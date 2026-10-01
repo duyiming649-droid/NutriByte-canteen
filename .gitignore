@@ -1,0 +1,10 @@
+# QA screenshots (local only)
+_review/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# logs
+*.log

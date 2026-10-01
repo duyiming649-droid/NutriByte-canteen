@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriByte · HKUST Campus Store · 3D Interior Layout Prototype</title>
+<style>
+  :root {
+    --green: #27a468;
+    --green-deep: #1c7a4e;
+    --ink: #2e3330;
+    --paper: #fbfcf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: #dfecdf;
+  }
+  #app, #app canvas { position: fixed; inset: 0; }
+
+  .chip {
+    position: fixed;
+    background: rgba(251, 252, 249, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(39, 164, 104, 0.22);
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(30, 60, 45, 0.10);
+  }
+
+  #brand {
+    top: 18px; left: 18px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px 10px 10px;
+    z-index: 10;
+  }
+  #brand .mark {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--green);
+    color: #fff; font-weight: 700; font-size: 15px;
+    display: grid; place-items: center;
+    letter-spacing: 0.5px;
+  }
+  #brand h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.3px; }
+  #brand p { font-size: 12px; color: #6d7a72; margin-top: 2px; }
+
+  #views {
+    position: fixed;
+    left: 50%; bottom: 20px;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+    padding: 8px;
+    z-index: 10;
+    max-width: calc(100vw - 24px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #views button {
+    appearance: none; border: 1px solid rgba(46, 51, 48, 0.14);
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--ink);
+    font: 600 13px/1 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+    padding: 9px 16px; border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+  }
+  #views button:hover { background: #eef7f1; }
+  #views button:active { transform: translateY(1px); }
+  #views button.on {
+    background: var(--green); border-color: var(--green); color: #fff;
+  }
+
+  #hint {
+    right: 18px; bottom: 20px;
+    padding: 8px 14px;
+    font-size: 12px; color: #5d6a62;
+    z-index: 10;
+  }
+  #tag {
+    top: 18px; right: 18px;
+    padding: 8px 14px;
+    font-size: 12px; font-weight: 600; color: var(--green-deep);
+    z-index: 10;
+  }
+
+  #loading {
+    position: fixed; inset: 0; z-index: 50;
+    background: var(--paper);
+    display: grid; place-items: center;
+    transition: opacity 0.5s ease;
+  }
+  #loading.done { opacity: 0; pointer-events: none; }
+  #loading .box { text-align: center; }
+  #loading .mark {
+    width: 64px; height: 64px; margin: 0 auto 16px;
+    border-radius: 16px; background: var(--green);
+    display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 22px;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  #loading p { font-size: 14px; color: #6d7a72; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #loading .mark { animation: none; }
+    #views button { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="brand" class="chip">
+  <div class="mark">NB</div>
+  <div>
+    <h1>NutriByte · HKUST Campus Store</h1>
+    <p>Interior layout prototype (MVP) · Eat well, Save time, Spend less</p>
+  </div>
+</div>
+
+<div id="tag" class="chip">Concept prototype · ~60㎡ · Kitchen 45%</div>
+<div id="views" class="chip"></div>
+<div id="hint" class="chip">Drag to orbit · Scroll to zoom · Right-drag to pan</div>
+
+<div id="loading">
+  <div class="box">
+    <div class="mark">NB</div>
+    <p>Preparing the store…</p>
+  </div>
+</div>
+
+<script>
+  window.__errs = [];
+  addEventListener('error', (e) => window.__errs.push(String(e.message || e)));
+  addEventListener('unhandledrejection', (e) => window.__errs.push(String(e.reason || e)));
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "./lib/three.module.min.js"
+  }
+}
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
