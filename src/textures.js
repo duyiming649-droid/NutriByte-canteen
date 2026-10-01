@@ -415,6 +415,72 @@ export function labelTexture(cn, en = '') {
 }
 
 // self-order kiosk UI, bilingual
+// today's available ingredients board (no set combos): two grouped columns
+export function ingredientBoardTexture() {
+  return makeCanvas(1024, 560, (ctx) => {
+    ctx.fillStyle = '#1c7a4e';
+    ctx.fillRect(0, 0, 1024, 560);
+    ctx.fillStyle = '#27a468';
+    ctx.fillRect(0, 0, 1024, 92);
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'left';
+    ctx.font = `bold 50px ${FONT}`;
+    ctx.fillText('今日食材', 44, 52);
+    ctx.font = `bold 26px ${FONT}`;
+    ctx.fillText("TODAY'S INGREDIENTS", 44, 82);
+    ctx.textAlign = 'right';
+    ctx.font = `bold 30px ${FONT}`;
+    ctx.fillText('FRESH TODAY', 980, 60);
+    const cols = [
+      {
+        x: 60, head: '蛋白质 PROTEIN',
+        items: [
+          ['韩式烤牛肉', 'Bulgogi beef'],
+          ['香烤鸡胸', 'Grilled chicken breast'],
+          ['香煎三文鱼', 'Pan-seared salmon'],
+          ['板豆腐', 'Silken tofu'],
+        ],
+      },
+      {
+        x: 540, head: '蔬菜与主食 VEGGIES & BASE',
+        items: [
+          ['西兰花', 'Broccoli'],
+          ['生菜', 'Lettuce'],
+          ['小番茄', 'Cherry tomatoes'],
+          ['糙米饭', 'Brown rice'],
+        ],
+      },
+    ];
+    for (const col of cols) {
+      ctx.fillStyle = '#2fa374';
+      roundRect(ctx, col.x, 122, 424, 46, 12);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `bold 26px ${FONT}`;
+      ctx.textAlign = 'left';
+      ctx.fillText(col.head, col.x + 18, 153);
+      let y = 216;
+      for (const [cn, en] of col.items) {
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `bold 31px ${FONT}`;
+        ctx.fillText(cn, col.x + 4, y);
+        ctx.fillStyle = '#bfe8d2';
+        ctx.font = `20px ${FONT}`;
+        ctx.fillText(en, col.x + 4, y + 28);
+        ctx.fillStyle = '#7cffc0';
+        ctx.beginPath();
+        ctx.arc(col.x + 396, y - 10, 6, 0, Math.PI * 2);
+        ctx.fill();
+        y += 78;
+      }
+    }
+    ctx.fillStyle = '#bfe8d2';
+    ctx.font = `24px ${FONT}`;
+    ctx.textAlign = 'left';
+    ctx.fillText('自由搭配 · 员工现装 Mix & match, assembled by our staff · 克重标准化 Standardised grams', 48, 534);
+  });
+}
+
 export function kioskUiTexture() {
   return makeCanvas(512, 512, (ctx) => {
     ctx.fillStyle = '#f4f7f4';
@@ -426,39 +492,49 @@ export function kioskUiTexture() {
     ctx.font = `bold 34px ${FONT}`;
     ctx.fillText('NutriByte 自助点餐', 22, 42);
     ctx.font = `20px ${FONT}`;
-    ctx.fillText('SELF-ORDER KIOSK', 22, 72);
-    const items = [
-      ['A 招牌牛肉能量碗', 'Bulgogi Bowl', 'HK$48'],
-      ['B 鸡胸高蛋白盒', 'Chicken Breast Box', 'HK$42'],
-      ['C 豆腐素食碗', 'Tofu Veggie Bowl', 'HK$38'],
+    ctx.fillText('SELF-ORDER · 今日食材 TODAY', 22, 72);
+    const chips = [
+      ['烤牛肉', 'Bulgogi beef'],
+      ['西兰花', 'Broccoli'],
+      ['烤鸡胸', 'Chicken breast'],
+      ['生菜', 'Lettuce'],
+      ['三文鱼', 'Salmon'],
+      ['小番茄', 'Tomatoes'],
+      ['豆腐', 'Tofu'],
+      ['糙米饭', 'Brown rice'],
     ];
-    items.forEach(([cn, en, price], i) => {
-      const y = 118 + i * 112;
+    chips.forEach(([cn, en], i) => {
+      const cx = 24 + (i % 2) * 240;
+      const y = 116 + Math.floor(i / 2) * 88;
       ctx.fillStyle = '#ffffff';
       ctx.strokeStyle = '#dfe7e1';
       ctx.lineWidth = 3;
-      roundRect(ctx, 24, y, 464, 94, 14);
+      roundRect(ctx, cx, y, 224, 72, 12);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = '#2e3330';
-      ctx.font = `bold 27px ${FONT}`;
-      ctx.fillText(cn, 44, y + 40);
+      ctx.font = `bold 25px ${FONT}`;
+      ctx.fillText(cn, cx + 16, y + 32);
       ctx.fillStyle = '#8a948c';
-      ctx.font = `19px ${FONT}`;
-      ctx.fillText(en, 44, y + 70);
+      ctx.font = `16px ${FONT}`;
+      ctx.fillText(en, cx + 16, y + 56);
       ctx.fillStyle = '#27a468';
-      roundRect(ctx, 368, y + 22, 104, 50, 12);
+      ctx.beginPath();
+      ctx.arc(cx + 192, y + 36, 14, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = '#ffffff';
-      ctx.font = `bold 25px ${FONT}`;
+      ctx.font = `bold 22px ${FONT}`;
       ctx.textAlign = 'center';
-      ctx.fillText(price, 420, y + 55);
+      ctx.fillText('+', cx + 192, y + 44);
       ctx.textAlign = 'left';
     });
     ctx.fillStyle = '#2e3330';
     ctx.font = `23px ${FONT}`;
     ctx.textAlign = 'center';
-    ctx.fillText('扫码下单 · 凭号自取 SCAN & COLLECT', 256, 478);
+    ctx.fillText('自由搭配 · 挑好由员工装配', 256, 474);
+    ctx.font = `18px ${FONT}`;
+    ctx.fillStyle = '#8a948c';
+    ctx.fillText('MIX & MATCH · WE ASSEMBLE', 256, 498);
   });
 }
 

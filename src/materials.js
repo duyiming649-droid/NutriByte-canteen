@@ -57,12 +57,7 @@ export function texMat(key, build) {
 
 export const signMaterials = {
   logo: () => texMat('logo', () => std({ map: T.logoTexture(), roughness: 0.5, transparent: true })),
-  menuA: () => texMat('menuA', () => std({ map: T.menuBoardTexture('今日菜单 TODAY', [
-    ['A · 招牌韩式牛肉能量碗', 'Signature Bulgogi Bowl', 'HK$48'],
-    ['B · 香烤鸡胸高蛋白盒', 'Grilled Chicken Breast Box', 'HK$42'],
-    ['C · 板豆腐素食碗', 'Tofu Veggie Bowl', 'HK$38'],
-    ['加购 · 30g西兰花 / 50g糙米饭', 'Add-on: broccoli 30g / brown rice 50g', '+HK$6'],
-  ], '克重标准化 Standardised grams · 前一天APP下单省HK$2 Order a day ahead, save HK$2'), roughness: 0.6 })),
+  menuA: () => texMat('menuA', () => std({ map: T.ingredientBoardTexture(), roughness: 0.6 })),
   menuB: () => texMat('menuB', () => std({ map: T.menuBoardTexture('自取指南 PICKUP GUIDE', [
     ['预订订单 · 前一天APP下单', 'Pre-orders (ordered yesterday)', 'A 架'],
     ['现场订单 · Kiosk 现点', 'Walk-in orders at kiosk', 'B 架'],
