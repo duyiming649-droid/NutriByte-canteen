@@ -72,11 +72,13 @@ export function buildShop(scene, reg) {
   scene.add(doorGlass);
   const transom = P.plane(1.2, 0.68, M.glass, 7.1, 2.63, 0);
   scene.add(transom);
-  for (const mx of [0.04, 2.15, 4.3, 6.46, 7.74, 8.36]) {
-    scene.add(P.box(0.08, H, 0.08, M.steelDark, mx, H / 2, 0));
-  }
-  scene.add(P.box(W, 0.1, 0.06, M.steelDark, W / 2, 2.95, 0));
-  scene.add(P.box(W, 0.06, 0.06, M.steelDark, W / 2, 0.03, 0));
+  // EXPERIMENT(no-pillars): black storefront mullions/rails removed for
+  // unobstructed interior photography. Restore when merging back to main.
+  // for (const mx of [0.04, 2.15, 4.3, 6.46, 7.74, 8.36]) {
+  //   scene.add(P.box(0.08, H, 0.08, M.steelDark, mx, H / 2, 0));
+  // }
+  // scene.add(P.box(W, 0.1, 0.06, M.steelDark, W / 2, 2.95, 0));
+  // scene.add(P.box(W, 0.06, 0.06, M.steelDark, W / 2, 0.03, 0));
   scene.add(P.box(0.06, 2.2, 0.08, M.brandGreen, 6.5, 1.1, 0));
   scene.add(P.box(0.06, 2.2, 0.08, M.brandGreen, 7.7, 1.1, 0));
   scene.add(P.box(1.26, 0.1, 0.08, M.brandGreen, 7.1, 2.25, 0));
