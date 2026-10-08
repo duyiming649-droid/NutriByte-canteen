@@ -85,6 +85,9 @@
     z-index: 10;
   }
 
+  /* EXPERIMENT(no-pillars): keep the photo frame clean */
+  #tag[hidden], #views[hidden], #hint[hidden] { display: none; }
+
   #loading {
     position: fixed; inset: 0; z-index: 50;
     background: var(--paper);
@@ -122,9 +125,11 @@
   </div>
 </div>
 
-<div id="tag" class="chip">Concept prototype · ~60㎡ · Kitchen 45%</div>
-<div id="views" class="chip"></div>
-<div id="hint" class="chip">Drag to orbit · Scroll to zoom · Right-drag to pan</div>
+<!-- EXPERIMENT(no-pillars): overlay chips hidden for photography.
+     #tag (top-right), #views (bottom-centre), #hint (bottom-right) removed. -->
+<div id="tag" class="chip" hidden></div>
+<div id="views" class="chip" hidden></div>
+<div id="hint" class="chip" hidden></div>
 
 <div id="loading">
   <div class="box">
