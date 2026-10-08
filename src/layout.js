@@ -63,15 +63,17 @@ export function buildShop(scene, reg) {
   scene.add(P.box(0.05, 0.03, D - 0.4, M.lightWhite, 0.2, 2.96, D / 2));
   scene.add(P.box(0.05, 0.03, D - 0.4, M.lightWhite, W - 0.2, 2.96, D / 2));
 
-  // storefront glass + mullions (door opening x 6.5-7.7)
+  // storefront glass + door opening (door removed for photography)
   const g1 = P.plane(6.46, H, M.glass, 3.23, H / 2, 0);
   scene.add(g1);
   const g2 = P.plane(0.58, H, M.glass, 8.05, H / 2, 0);
   scene.add(g2);
-  const doorGlass = P.plane(1.2, 2.2, M.glass, 7.1, 1.1, 0);
-  scene.add(doorGlass);
-  const transom = P.plane(1.2, 0.68, M.glass, 7.1, 2.63, 0);
-  scene.add(transom);
+  // EXPERIMENT(no-pillars): glass door (leaf, transom, green frame, handles)
+  // removed so the entrance is an open gap for interior photography.
+  // const doorGlass = P.plane(1.2, 2.2, M.glass, 7.1, 1.1, 0);
+  // scene.add(doorGlass);
+  // const transom = P.plane(1.2, 0.68, M.glass, 7.1, 2.63, 0);
+  // scene.add(transom);
   // EXPERIMENT(no-pillars): black storefront mullions/rails removed for
   // unobstructed interior photography. Restore when merging back to main.
   // for (const mx of [0.04, 2.15, 4.3, 6.46, 7.74, 8.36]) {
@@ -79,11 +81,12 @@ export function buildShop(scene, reg) {
   // }
   // scene.add(P.box(W, 0.1, 0.06, M.steelDark, W / 2, 2.95, 0));
   // scene.add(P.box(W, 0.06, 0.06, M.steelDark, W / 2, 0.03, 0));
-  scene.add(P.box(0.06, 2.2, 0.08, M.brandGreen, 6.5, 1.1, 0));
-  scene.add(P.box(0.06, 2.2, 0.08, M.brandGreen, 7.7, 1.1, 0));
-  scene.add(P.box(1.26, 0.1, 0.08, M.brandGreen, 7.1, 2.25, 0));
-  scene.add(P.box(0.03, 0.9, 0.03, M.steelDark, 7.02, 1.05, 0.05));
-  scene.add(P.box(0.03, 0.9, 0.03, M.steelDark, 7.18, 1.05, -0.05));
+  // EXPERIMENT(no-pillars): green door frame + handles removed with the door.
+  // scene.add(P.box(0.06, 2.2, 0.08, M.brandGreen, 6.5, 1.1, 0));
+  // scene.add(P.box(0.06, 2.2, 0.08, M.brandGreen, 7.7, 1.1, 0));
+  // scene.add(P.box(1.26, 0.1, 0.08, M.brandGreen, 7.1, 2.25, 0));
+  // scene.add(P.box(0.03, 0.9, 0.03, M.steelDark, 7.02, 1.05, 0.05));
+  // scene.add(P.box(0.03, 0.9, 0.03, M.steelDark, 7.18, 1.05, -0.05));
 
   // outdoor hint (seen through glass / in dollhouse views)
   const bd = P.plane(44, 22, S.backdrop(), W / 2, 8, -14);
@@ -196,13 +199,14 @@ export function buildShop(scene, reg) {
   const cr1 = P.crate(0x2fa36b); cr1.position.set(1.4, 0, 5.35); island.add(cr1);
   const cr2 = P.crate(0x1c7a4e); cr2.position.set(2.2, 0, 5.35); island.add(cr2);
   reg('pack-island', island, 'floor');
-  // linear light over island
-  const batten = P.battenLight(2.2);
-  batten.rotation.y = Math.PI / 2;
-  batten.position.set(2.75, 2.35, 5.35);
-  reg('island-batten', batten, 'none');
-  scene.add(P.cyl(0.006, 0.006, 0.62, 6, M.charcoal, 1.8, 2.69, 5.35));
-  scene.add(P.cyl(0.006, 0.006, 0.62, 6, M.charcoal, 3.7, 2.69, 5.35));
+  // EXPERIMENT(no-pillars): island batten light + rods removed (overhead
+  // fixtures out of frame for photography).
+  // const batten = P.battenLight(2.2);
+  // batten.rotation.y = Math.PI / 2;
+  // batten.position.set(2.75, 2.35, 5.35);
+  // reg('island-batten', batten, 'none');
+  // scene.add(P.cyl(0.006, 0.006, 0.62, 6, M.charcoal, 1.8, 2.69, 5.35));
+  // scene.add(P.cyl(0.006, 0.006, 0.62, 6, M.charcoal, 3.7, 2.69, 5.35));
 
   // back line: sink / prep / range / ovens / fridge, z 6.5-7.2
   const backline = P.grp(0, 0, 0);
@@ -529,13 +533,14 @@ export function buildShop(scene, reg) {
   const clock = P.clockProp(); clock.position.set(6.35, 2.45, 7.16);
   scene.add(clock);
 
-  // frosted brand band on the shopfront glass + door stickers
+  // frosted brand band on the shopfront glass
   const frost = P.plane(6.0, 0.28, S.frost(), 3.25, 1.47, 0.016);
   scene.add(frost);
-  const hours = P.plane(0.28, 0.28, S.hours(), 6.85, 1.55, 0.02);
-  scene.add(hours);
-  const doorLogo = P.plane(0.3, 0.3, S.logo(), 7.35, 1.5, 0.02);
-  scene.add(doorLogo);
+  // EXPERIMENT(no-pillars): hours + logo stickers removed with the door glass.
+  // const hours = P.plane(0.28, 0.28, S.hours(), 6.85, 1.55, 0.02);
+  // scene.add(hours);
+  // const doorLogo = P.plane(0.3, 0.3, S.logo(), 7.35, 1.5, 0.02);
+  // scene.add(doorLogo);
 
   // garland across the shopfront
   const garl = P.garland(2.95, 0, 0.12);
@@ -557,10 +562,12 @@ export function buildShop(scene, reg) {
     sp.scale.y = 0.5;
     scene.add(sp);
   });
-  for (const [px, pz] of [[1.05, 0.37], [2.45, 0.37], [1.5, 2.2], [2.75, 1.5], [4.55, 1.5]]) {
-    const pl = P.pendantLamp(); pl.position.set(px, 0, pz);
-    scene.add(pl);
-  }
+  // EXPERIMENT(no-pillars): overhead pendant lamps removed for photography.
+  // Their point lights in main.js are kept so the room stays lit.
+  // for (const [px, pz] of [[1.05, 0.37], [2.45, 0.37], [1.5, 2.2], [2.75, 1.5], [4.55, 1.5]]) {
+  //   const pl = P.pendantLamp(); pl.position.set(px, 0, pz);
+  //   scene.add(pl);
+  // }
 
   return {
     steamAnchors: [
